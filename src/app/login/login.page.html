@@ -1,0 +1,49 @@
+<ion-content class="fundo_login fadeIn">
+
+    <form [formGroup]="fGroup">
+  <ion-grid class="h-100">
+    <ion-row class="vertical">
+      <ion-col size="12" align-self-center>
+        <div margin-bottom>
+          <img src="assets/images/login/logo_nova.png" width="250">
+        </div>
+      </ion-col>
+      <ion-col size="12" align-self-center>
+       
+          <ion-item>
+            <ion-icon name="person" class="icone-absoluto"></ion-icon>
+            <ion-input placeholder="Usuário" formControlName="username" text-center></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="usuario_request">
+            <p text-center class="ion-no-margin">Esse campo é obrigatório</p>
+          </ion-text>
+      </ion-col>
+      <ion-col size="12" align-self-center>
+        <ion-item>
+          <ion-icon name="lock" class="icone-absoluto"></ion-icon>
+          <ion-input placeholder="Senha" type="password" formControlName="password" text-center></ion-input>
+        </ion-item>
+
+        <ion-text margin-top color="danger" *ngIf="senha_request" color="danger">
+          <p text-center class="ion-no-margin">Esse campo é obrigatório</p>
+        </ion-text>
+
+        <ion-text margin-top color="danger" *ngIf="login_request" color="danger">
+          <p text-center class="ion-no-margin">Credenciais inválidas.</p>
+        </ion-text>
+
+      </ion-col>
+      <ion-col size="12" align-self-center>
+        <ion-list>
+          <ion-button margin-top expand="block" (click)="loginOff()">Login</ion-button>
+        </ion-list>
+       
+        <div margin-top>
+          <div text-center class="white" *ngIf="progresso">Carregando</div>
+          <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-content>

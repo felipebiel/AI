@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goToTabs()">
+        <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Configurações
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="fadeIn">
+
+  <ion-item>
+    <ion-label>Nível de acionamento</ion-label>
+    <ion-select [(ngModel)]="nivel" (ionChange)="mudarNivel()">
+      <ion-select-option value="0">0</ion-select-option>
+      <ion-select-option value="1">1</ion-select-option>
+      <ion-select-option value="2">2</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Modo</ion-label>
+    <ion-select [(ngModel)]="modo" (ionChange)="mudarModo()">
+      <ion-select-option value="automatico">Automatico</ion-select-option>
+      <ion-select-option value="manual">Manual</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-text *ngIf="automatico">
+      <p><b>Modo automático:</b> A rotina do dispositivo é ativada a qualquer hora do dia, respeitando sempre o nível de acionamento.</p>
+  </ion-text>
+
+
+
+  <ion-text *ngIf="!automatico">
+      <p><b>Modo manual:</b> A rotina do dispositivo é ativada em um range de horário especifico, respeitando sempre o nível de acionamento.</p>
+  </ion-text>
+
+
+  <ion-item *ngIf="!automatico">
+    <ion-label>Hora de inicio</ion-label>
+    <ion-datetime displayFormat="HH:mm"></ion-datetime>
+  </ion-item>
+
+  <ion-item *ngIf="!automatico">
+    <ion-label>Hora de termino</ion-label>
+    <ion-datetime displayFormat="HH:mm"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="block" margin-top>Salvar</ion-button>
+</ion-content>

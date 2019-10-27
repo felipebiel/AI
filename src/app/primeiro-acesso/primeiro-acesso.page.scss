@@ -1,0 +1,39 @@
+/*COR DOS CABEÇALHOS*/
+
+ion-toolbar{
+    --background: #174580;
+    color: white;
+  }
+  
+  ion-tab-bar{
+    --background: #174580;
+    color: white;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+  
+
+  /*ALINHA MENTO DOS ICONES*/
+
+  .icone-absoluto{
+    position: absolute;
+  }
+
+  .icone-absoluto-right{
+    position: absolute;
+    right: 10px;
+    z-index: 99999999999;
+  }

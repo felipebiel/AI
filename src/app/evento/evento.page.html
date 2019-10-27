@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>
+      Eventos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+
+  <div *ngIf="data" class="fadeIn">
+    <ion-card>
+      <ion-card-header class="card-success">
+        <ion-card-title>
+          <ion-icon name="checkmark-circle"></ion-icon> Success
+        </ion-card-title>
+        <ion-card-subtitle end>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ '2019-10-26 18:28:33' | dateAgo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header class="card-danger">
+        <ion-card-title>
+          <ion-icon name="close"></ion-icon> Erro
+        </ion-card-title>
+        <ion-card-subtitle end>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ '2019-10-26 14:28:33' | dateAgo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header class="card-alert">
+        <ion-card-title>
+          <ion-icon name="alert"></ion-icon> Alert
+        </ion-card-title>
+        <ion-card-subtitle end>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ '2019-10-25 18:28:33' | dateAgo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header class="card-info">
+        <ion-card-title>
+          <ion-icon name="alert"></ion-icon> Info
+        </ion-card-title>
+        <ion-card-subtitle end>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ '2019-10-24 18:28:33' | dateAgo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <!-- Data to display after skeleton screen -->
+
+  <!-- Skeleton screen -->
+  <div *ngIf="!data">
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

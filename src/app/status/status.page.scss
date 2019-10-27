@@ -1,0 +1,43 @@
+/*COR DOS CABEÇALHOS*/
+
+ion-toolbar{
+    --background: #174580;
+    color: white;
+  }
+  
+  ion-tab-bar{
+    --background: #174580;
+    color: white;
+  }
+
+  .porcentagem_reservatorio{
+    font-size: 30pt;
+    font-weight: bold;
+  }
+  
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+
+  /*LABEL DE CONSUMO */
+
+  .card-success{
+    border-left: 5px solid #c3e6cb;
+    background-color: #c3e6cb;
+  }
+  
+  .card-success ion-card-title{
+    color: #155724;
+  }

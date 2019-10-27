@@ -1,0 +1,59 @@
+.fundo_login{
+    --ion-background-color: #174580;
+}
+
+.h-100{
+height: 100vh;
+display: table;
+}
+
+.vertical{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+.img_size{
+    --size:150px;
+}
+
+ion-input{
+    --color: white;
+}
+
+ion-icon{
+    color: white;
+}
+
+ion-item {
+    --border-color: white;
+    --highlight-color-valid: white;
+    --highlight-color-invalid: red;
+    --highlight-color-focused: white;
+  }
+
+.white{
+    color:white;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+
+
+/*ALINHA MENTO DOS ICONES*/
+
+.icone-absoluto{
+  position: absolute;
+}
