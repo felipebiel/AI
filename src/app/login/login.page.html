@@ -21,7 +21,7 @@
       <ion-col size="12" align-self-center>
         <ion-item>
           <ion-icon name="lock" class="icone-absoluto"></ion-icon>
-          <ion-input placeholder="Senha" type="password" formControlName="password" text-center></ion-input>
+          <ion-input placeholder="Senha" (keyup.enter)="login()" type="password" formControlName="password" text-center></ion-input>
         </ion-item>
 
         <ion-text margin-top color="danger" *ngIf="senha_request" color="danger">
@@ -35,11 +35,11 @@
       </ion-col>
       <ion-col size="12" align-self-center>
         <ion-list>
-          <ion-button margin-top expand="block" (click)="loginOff()">Login</ion-button>
+          <ion-button margin-top expand="block" (click)="login()">Login</ion-button>
         </ion-list>
        
         <div margin-top>
-          <div text-center class="white" *ngIf="progresso">Carregando</div>
+          <div text-center margin class="white" *ngIf="progresso">Carregando</div>
           <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
         </div>
       </ion-col>

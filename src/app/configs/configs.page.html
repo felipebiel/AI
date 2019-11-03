@@ -1,8 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" (click)="goToTabs()">
+    <!--<ion-buttons slot="start" (click)="goToTabs()">
         <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
+    
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -17,17 +21,17 @@
   <ion-item>
     <ion-label>Nível de acionamento</ion-label>
     <ion-select [(ngModel)]="nivel" (ionChange)="mudarNivel()">
-      <ion-select-option value="0">0</ion-select-option>
-      <ion-select-option value="1">1</ion-select-option>
-      <ion-select-option value="2">2</ion-select-option>
+      <ion-select-option value="0">Vazio</ion-select-option>
+      <ion-select-option value="1">Baixo</ion-select-option>
+      <ion-select-option value="2">Médio</ion-select-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label>Modo</ion-label>
     <ion-select [(ngModel)]="modo" (ionChange)="mudarModo()">
-      <ion-select-option value="automatico">Automatico</ion-select-option>
-      <ion-select-option value="manual">Manual</ion-select-option>
+      <ion-select-option value="1">Automatico</ion-select-option>
+      <ion-select-option value="0">Manual</ion-select-option>
     </ion-select>
   </ion-item>
 

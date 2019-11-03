@@ -35,6 +35,10 @@ export class MenuPage implements OnInit {
   logout(){
     //console.log("SAINDO");
     this.storage.remove("token");
+    this.storage.remove("user");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
     this.navController.navigateRoot('/login');
   }
 
@@ -51,6 +55,16 @@ export class MenuPage implements OnInit {
   redirectToSobre(){
     this.menu.toggle();
     this.navController.navigateForward('/sobre')
+  }
+
+  redirectToEventos(){
+    this.menu.toggle();
+    this.navController.navigateForward('/tabs')
+  }
+
+  redirectToStatus(){
+    this.menu.toggle();
+    this.navController.navigateForward('/tabs/status')
   }
 
 }

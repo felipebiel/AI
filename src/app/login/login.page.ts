@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
         if(token != null) {
           //habilita o menu novamente ao redirecionar
           this.menuCtrl.enable(true);
-          //this.navController.navigateRoot('/tabs');
+          this.navController.navigateRoot('/tabs');
         }
       },
       error => {
@@ -72,12 +72,21 @@ export class LoginPage implements OnInit {
 
       this.clienteService.loginCliente(this.fGroup.value).subscribe(
         data => {
+          console.log(data);
           //se login OK salva no storange o token e retorna true
           const response = (data as any);
           this.storage.setItem('token', response.token);
+          localStorage.setItem('token', response.token);
+          this.storage.setItem('user', response);
+
+          if(response.firstAccess == 1){
+            this.navController.navigateRoot('/primeiro-acesso');
+          }else{
+            
+            this.navController.navigateRoot('/tabs');
+          }
+          //
           this.progresso = !this.progresso;
-          this.navController.navigateRoot('/tabs');
-          //this.navController.navigateRoot('/primeiro-acesso');
         },
         error => {
           this.login_request = true;

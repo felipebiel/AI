@@ -1,16 +1,56 @@
-<ion-header><ion-toolbar>
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start" (click)="goToTabs()">
-        <ion-icon name="arrow-back"></ion-icon>
+      <ion-icon name="arrow-back"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-        MeusDados
+      MeusDados
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding class="fadeIn">
+  <form [formGroup]="fGroup">
+    <ion-item>
+      <ion-label position="stacked">Usuário</ion-label>
+      <ion-input formControlName="username" disabled></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input formControlName="email" disabled></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Primeiro Nome</ion-label>
+      <ion-input formControlName="firstname"></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="firstname_request">
+      <p text-center class="ion-no-margin">{{ firstname_message }}</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Sobrenome</ion-label>
+      <ion-input formControlName="lastname"></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="lastname_request">
+      <p text-center class="ion-no-margin">{{ lastname_message }}</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">CPF</ion-label>
+      <ion-input formControlName="cpf" disabled></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-button margin-top expand="block" (click)="alterarUser()">Alterar</ion-button>
+    </ion-list>
+
+  </form>
 
 </ion-content>

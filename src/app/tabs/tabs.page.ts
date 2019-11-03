@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,13 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(
+    private menuCtrl: MenuController,
+  ) {}
 
+
+  ionViewWillEnter() {
+    //desabilita o side menu no login
+    this.menuCtrl.enable(true);
+  }
 }
