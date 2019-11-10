@@ -6,7 +6,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    
+
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -18,44 +18,56 @@
 
 <ion-content padding class="fadeIn">
 
-  <ion-item>
-    <ion-label>Nível de acionamento</ion-label>
-    <ion-select [(ngModel)]="nivel" (ionChange)="mudarNivel()">
-      <ion-select-option value="0">Vazio</ion-select-option>
-      <ion-select-option value="1">Baixo</ion-select-option>
-      <ion-select-option value="2">Médio</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <div class="fadeIn" *ngIf="!progresso">
+    <ion-item>
+      <ion-label>Nível de acionamento</ion-label>
+      <ion-select [(ngModel)]="nivel" (ionChange)="mudarNivel()">
+        <ion-select-option value="0">Vazio</ion-select-option>
+        <ion-select-option value="1">Baixo</ion-select-option>
+        <ion-select-option value="2">Médio</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Modo</ion-label>
-    <ion-select [(ngModel)]="modo" (ionChange)="mudarModo()">
-      <ion-select-option value="1">Automatico</ion-select-option>
-      <ion-select-option value="0">Manual</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Quantidade do reservatório (litros):</ion-label>
+      <ion-input [(ngModel)]="reservoirCapacity" type="number"></ion-input>
+    </ion-item>
 
-
-  <ion-text *ngIf="automatico">
-      <p><b>Modo automático:</b> A rotina do dispositivo é ativada a qualquer hora do dia, respeitando sempre o nível de acionamento.</p>
-  </ion-text>
-
-
-
-  <ion-text *ngIf="!automatico">
-      <p><b>Modo manual:</b> A rotina do dispositivo é ativada em um range de horário especifico, respeitando sempre o nível de acionamento.</p>
-  </ion-text>
+    <ion-item>
+      <ion-label>Modo</ion-label>
+      <ion-select [(ngModel)]="modo" (ionChange)="mudarModo()">
+        <ion-select-option value="1">Automatico</ion-select-option>
+        <ion-select-option value="0">Manual</ion-select-option>
+      </ion-select>
+    </ion-item>
 
 
-  <ion-item *ngIf="!automatico">
-    <ion-label>Hora de inicio</ion-label>
-    <ion-datetime displayFormat="HH:mm"></ion-datetime>
-  </ion-item>
+    <ion-text *ngIf="automatico">
+      <p><b>Modo automático:</b> A rotina do dispositivo é ativada a qualquer hora do dia, respeitando sempre o nível de
+        acionamento.</p>
+    </ion-text>
 
-  <ion-item *ngIf="!automatico">
-    <ion-label>Hora de termino</ion-label>
-    <ion-datetime displayFormat="HH:mm"></ion-datetime>
-  </ion-item>
+    <ion-text *ngIf="!automatico">
+      <p><b>Modo manual:</b> A rotina do dispositivo é ativada em um range de horário especifico, respeitando sempre o
+        nível de acionamento.</p>
+    </ion-text>
 
-  <ion-button expand="block" margin-top>Salvar</ion-button>
+
+    <ion-item *ngIf="!automatico">
+      <ion-label>Hora de inicio</ion-label>
+      <ion-datetime displayFormat="HH:mm"></ion-datetime>
+    </ion-item>
+
+    <ion-item *ngIf="!automatico">
+      <ion-label>Hora de termino</ion-label>
+      <ion-datetime displayFormat="HH:mm"></ion-datetime>
+    </ion-item>
+
+    <ion-button expand="block" margin-top (click)="updateDevice()">Salvar</ion-button>
+  </div>
+
+  <div margin-top class="fadeIn">
+    <div text-center margin class="white" *ngIf="progresso">Carregando</div>
+    <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
+  </div>
 </ion-content>

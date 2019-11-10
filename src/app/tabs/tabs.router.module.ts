@@ -8,16 +8,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'evento',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../evento/evento.module').then(m => m.EventoPageModule)
-          }
-        ]
-      },
-      {
         path: 'status',
         children: [
           {
@@ -28,15 +18,35 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'evento',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../evento/evento.module').then(m => m.EventoPageModule)
+          }
+        ]
+      },
+      {
+        path: 'consumo',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../consumo/consumo.module').then(m => m.ConsumoPageModule)
+          }
+        ]
+      },
+      {
         path: '',
-        redirectTo: '/tabs/evento',
+        redirectTo: '/tabs/status',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/evento',
+    redirectTo: '/tabs/status',
     pathMatch: 'full'
   }
 ];

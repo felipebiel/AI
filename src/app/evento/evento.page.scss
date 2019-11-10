@@ -47,6 +47,10 @@ ion-tab-bar{
   color: #0c5460;
 }
 
+.card-info p{
+  color: #0c5460;
+}
+
 .card-info ion-card-subtitle{
   color: #0c5460;
 }
@@ -86,4 +90,23 @@ ion-tab-bar{
 .fadeIn {
   animation-name: fadeIn;
   animation-duration: 1s;
+}
+
+.text-danger{
+  color: #871111;
+}
+.text-success{
+  color: #14950e;
+}
+.text-nivel0{
+  color: #871111;
+}
+.text-nivel1{
+  color: #b88814;
+}
+.text-nivel2{
+  color: #829e23;
+}
+.text-nivel3{
+  color: #14950e;
 }

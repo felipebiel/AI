@@ -10,39 +10,72 @@
 </ion-header>
 
 <ion-content padding class="fadeIn">
-  <div class="ion-text-center">
-    <h3>Status da bomba</h3>
+
+  <div class="fadeIn" *ngIf="!progresso">
+
+    <div class="ion-text-center">
+      <h3>Status da bomba</h3>
+    </div>
+
+    <ion-card>
+      <ion-card-header class=""
+        [ngClass]="logMomento.onOff==1 ?'ion-text-center card-success':'ion-text-center card-alert'">
+        <ion-card-title>
+          <span *ngIf="logMomento.onOff==1"> Ligada</span>
+          <span *ngIf="logMomento.onOff==0"> Desligada</span>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <div class="ion-text-center">
+      <h3>Nível</h3>
+    </div>
+    <div margin-bottom class="ion-text-center">
+      <img [src]="'assets/images/status/status_' + logMomento.levelAtMoment + '.png'" width="250">
+    </div>
+
+    <div class="ion-text-center">
+      <h2 class="porcentagem_reservatorio">{{ porcentagemReservatorio }}%</h2>
+      <h4>Aproximadamente {{ litrosReservatorio }} Litros</h4>
+    </div>
+
+    <div class="ion-text-center consumo">
+      <h3>Consumo</h3>
+    </div>
+    <ion-card>
+      <ion-card-header class="ion-text-center card-success">
+        <ion-card-title>
+          <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon> Normal
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <div class="ion-text-center consumo">
+      <h3>Controle da bomba d'agua</h3>
+    </div>
+
+    <ion-list *ngIf="logMomento.levelAtMoment  == 3">
+  
+      <ion-card-header
+        class="ion-text-center card-alert">
+        <ion-card-title>
+          <p>O reservatório está cheio, nenhuma ação é permitida</p>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-list>
+
+    <ion-list *ngIf="logMomento.onOff==1">
+      <ion-button color="warning" margin-top expand="block" (click)="confirmarDesligarBomba()">Desligar</ion-button>
+    </ion-list>
+
+    <ion-list *ngIf="logMomento.onOff==0 && logMomento.levelAtMoment < 3">
+      <ion-button color="warning" margin-top expand="block" (click)="login()">ligar</ion-button>
+    </ion-list>
   </div>
 
-  <ion-card>
-    <ion-card-header class="ion-text-center card-success">
-      <ion-card-title>
-        Ligada
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
-
-  <div class="ion-text-center">
-    <h3>Nível</h3>
+  <div margin-top class="fadeIn">
+    <div text-center margin class="white" *ngIf="progresso">Carregando</div>
+    <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
   </div>
-  <div margin-bottom class="ion-text-center">
-    <img src="assets/images/status/status_1.png" width="250">
-  </div>
-
-  <div class="ion-text-center">
-    <h2 class="porcentagem_reservatorio">40%</h2>
-    <h4>Aproximadamente 500 Litros</h4>
-  </div>
-
-  <div class="ion-text-center consumo">
-    <h2 class="porcentagem_reservatorio">Consumo</h2>
-  </div>
-  <ion-card>
-    <ion-card-header class="ion-text-center card-success">
-      <ion-card-title>
-        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon> Normal
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
 
 </ion-content>

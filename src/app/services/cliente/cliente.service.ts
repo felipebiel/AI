@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { UserInterface } from 'src/app/interfaces/UserInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,7 @@ export class ClienteService {
   private url_base = "http://172.132.0.104:8090";
 
   public logado:boolean = false;
-  private token;
-  private id;
-  private username;
-  private password;
-  private firstname;
-  private lastname;
-  private email;
-  private enabled;
-  private adress;
-  private amountOfPeopleInTheResidence;
-  private firstAccess;
+  private user:UserInterface;
 
   constructor(
     private http: HttpClient,
@@ -30,23 +21,13 @@ export class ClienteService {
   ) { 
     this.storage.getItem('user').then(
       data => {
-        const response = (data as any);
-        this.id = response.id;
-        this.username = response.username;
-        this.email = response.email;
-        this.firstname = response.firstname;
-        this.lastname = response.lastname;
-        this.enabled = response.enabled;
+        this.user = (data as UserInterface);
       });
   }
 
 
   loginCliente(form){
-    let headers = { headers: 
-      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }}
-
-    return this.http.post(this.url_base+"/token/generate-token", form);
-    
+    return this.http.post(this.url_base+"/token/generate-token", form);    
   }
 
   loginOff(){
@@ -55,25 +36,19 @@ export class ClienteService {
   }
 
   updateUser(form){
-    ///api/user/updateUser/1
-    //console.log(form);
 
-    //this.storage.getItem('token').then(data => this.token = data)
-
-    this.token = localStorage.getItem('token');
-    console.log(this.token);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization':'Bearer ' + this.token,
+      'Authorization':'Bearer ' + this.user.token,
     });
  
 
     const request  = {
-      username: this.username,
+      username: this.user.username,
       password: form.password,
-      firstname: form.firstname != undefined ? form.firstname : this.firstname,
-      lastname: form.lastname != undefined ? form.lastname : this.lastname,
-      email: this.email,
+      firstname: form.firstname != undefined ? form.firstname : this.user.firstname,
+      lastname: form.lastname != undefined ? form.lastname : this.user.lastname,
+      email: this.user.email,
       amountOfPeopleInTheResidence: parseInt(form.qtd_moradores),
       firstAccess: 0,
       enabled: true,
@@ -94,7 +69,7 @@ export class ClienteService {
     //console.log(`${this.url_base}/api/user/updateUser/1`);
     //console.log(request)
     
-    return this.http.put(`${this.url_base}/api/user/updateAdmin/${this.id}`, request, {headers});
+    return this.http.put(`${this.url_base}/api/user/updateAdmin/${this.user.id}`, request, {headers});
   }
 
   testeGet(){

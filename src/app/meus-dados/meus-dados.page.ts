@@ -3,6 +3,7 @@ import { NavController, ToastController } from '@ionic/angular';
 import { ClienteService } from '../services/cliente/cliente.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { UserInterface } from '../interfaces/UserInterface';
 
 @Component({
   selector: 'app-meus-dados',
@@ -15,11 +16,13 @@ export class MeusDadosPage {
 
   fGroup: FormGroup;
 
-  progresso: boolean = false;
+  progresso: boolean = true;
   firstname_request = false;
   firstname_message = "";
   lastname_request = false;
   lastname_message = "";
+
+  private user: UserInterface;
 
   constructor(
     public navController: NavController,
@@ -28,6 +31,11 @@ export class MeusDadosPage {
     private storage: NativeStorage,
     public toastController: ToastController
   ) {
+
+    this.storage.getItem('user').then(
+      data => {
+        this.user = (data as UserInterface);
+      });
 
     //iniciano o objeto FormGroup, com suas validações
     this.fGroup = this.fBuilder.group({
@@ -49,24 +57,21 @@ export class MeusDadosPage {
     });
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
 
     this.firstname_request = false;
     this.firstname_message = "";
     this.lastname_request = false;
     this.lastname_message = "";
 
-    this.storage.getItem('user').then(
-      data => {
-        const response = (data as any);
+    
+    this.fGroup.controls.username.setValue(this.user.username);
+    this.fGroup.controls.email.setValue(this.user.email);
+    this.fGroup.controls.firstname.setValue(this.user.firstname);
+    this.fGroup.controls.lastname.setValue(this.user.lastname);
+    this.fGroup.controls.cpf.setValue(this.user.cpf);
 
-        this.fGroup.controls.username.setValue(response.username);
-        this.fGroup.controls.email.setValue(response.email);
-        this.fGroup.controls.firstname.setValue(response.firstname);
-        this.fGroup.controls.lastname.setValue(response.lastname);
-        this.fGroup.controls.cpf.setValue(response.cpf);
-
-      });
+    this.progresso = false;
   }
 
   goToTabs() {

@@ -7,13 +7,14 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      MeusDados
+      Meus Dados
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="fadeIn">
-  <form [formGroup]="fGroup">
+
+  <form [formGroup]="fGroup" *ngIf="!progresso" class="fadeIn">
     <ion-item>
       <ion-label position="stacked">Usuário</ion-label>
       <ion-input formControlName="username" disabled></ion-input>
@@ -52,5 +53,11 @@
     </ion-list>
 
   </form>
+
+
+  <div margin-top class="fadeIn">
+    <div text-center margin class="white" *ngIf="progresso">Carregando</div>
+    <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
+  </div>
 
 </ion-content>

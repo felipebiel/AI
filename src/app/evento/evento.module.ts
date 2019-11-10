@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { EventoPage } from './evento.page';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { TratarNivelPipe } from '../pipes/nivel/tratar-nivel.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     RouterModule.forChild([{ path: '', component: EventoPage }])
   ],
-  declarations: [EventoPage, DateAgoPipe]
+  declarations: [EventoPage, DateAgoPipe, TratarNivelPipe]
 })
 export class EventoPageModule {}

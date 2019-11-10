@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { MenuPage } from './menu/menu.page';
 
+
 @NgModule({
   declarations: [AppComponent, MenuPage],
   entryComponents: [],

@@ -6,14 +6,16 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   providedIn: 'root'
 })
 export class EventoServiceService {
+  private url_base = "http://172.132.0.104:8090";
 
   constructor(
-    //private http: HttpClient,
+    private http: HttpClient,
     private storage: NativeStorage
   ) { }
 
-  getEventos(page:number ){
+  getEventos(page:number, mac){
     //EVENTO QUE BUSCA DA API OS EVENTOS
-    return page;
+    //alert(mac);
+    return this.http.get(`${this.url_base}/api/logAPI/listaLogALL?limInf=${page}&limSup=10&mac=${mac}`);  
   }
 }

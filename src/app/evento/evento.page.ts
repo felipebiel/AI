@@ -1,46 +1,58 @@
 import { Component } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { EventoServiceService } from '../services/eventos/evento-service.service';
-import { ClienteService } from '../services/cliente/cliente.service';
+import { EventoInterface } from '../interfaces/EventoInterface';
+import { DeviceService } from '../services/device/device.service';
+import { DeviceInterface } from '../interfaces/DeviceInterface';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-evento',
   templateUrl: 'evento.page.html',
   styleUrls: ['evento.page.scss'],
-  providers: [EventoServiceService, ClienteService]
+  providers: [
+    EventoServiceService,
+    DeviceService,
+  ]
 })
 export class EventoPage {
 
-  data:boolean = false;
-  page:number = 1;
-    
+  data: boolean = false;
+  page_inicio: number = 1;
+  private eventos: Array<EventoInterface>;
+  private device: DeviceInterface;
 
   constructor(
     private storage: NativeStorage,
     private eventosService: EventoServiceService,
-    private clienteSevice: ClienteService
-    ) {
-    setTimeout(() => {
-      this.data = true;
-      this.getEventos()
-    }, 3000);
+    private deviceService: DeviceService,
+  ) {
   }
 
-  ionViewWillEnter(){
-    this.storage.getItem('user').then(
+  ionViewDidEnter(){
+    //pega o id do user persistido e coloca na requisição
+    this.deviceService.getDevice().subscribe(
       data => {
-        const response = (data as any);
+        
+        this.device = (data as DeviceInterface);
+        //alert(this.device.id);
+        this.getEventos();
+
       },
       error => {
-        console.log(error);
+
       }
     );
-
-    this.clienteSevice.testeGet();
+    this.data = true;
   }
 
-  getEventos(){
-    console.log(this.eventosService.getEventos(this.page));
+  getEventos() {
+    this.eventosService.getEventos(this.page_inicio, this.device.id).subscribe(
+      data=>{
+        this.eventos = (data as Array<EventoInterface>);
+        //alert(this.eventos);
+        //this.data = true;
+      }
+    );
   }
-
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { UserInterface } from 'src/app/interfaces/UserInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,20 +9,46 @@ import { HttpClient } from '@angular/common/http';
 export class DeviceService {
 
   private url_base = "http://172.132.0.104:8090";
+  private user: UserInterface;
 
   constructor(
-    private http: HttpClient
-  ) { }
-
-  getDevice(id){
-    let headers = { headers: 
-      {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }}
-
-    return this.http.get(`${this.url_base}/api/device/deviceByUserId/${id}`);
-    
+    private http: HttpClient,
+    private storage: NativeStorage,
+  ) {
+    this.storage.getItem('user').then(
+      data => {
+        this.user = (data as UserInterface);
+      });
   }
 
-  teste(){
+  getDevice() {
+    return this.http.get(`${this.url_base}/api/device/deviceByUserId/${this.user.id}`);
+  }
+
+  updateDevice(id, form) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.user.token,
+    });
+
+
+    const request = {
+      autoMode: form.modo,
+      idCont: 0,
+      levelForActingAuto: form.nivel,
+      reservoirCapacity: form.reservoirCapacity,
+    }
+
+
+    return this.http.put(`${this.url_base}/api/device/update/${id}`, request);
+  }
+
+  teste() {
     return true;
+  }
+
+  commandDevice(mac, comando) {
+    ///api/APP/writeComand?comando=B0&mac=de%3A4f%3A22%3A36%3A99%3A18"
+    return this.http.get(`${this.url_base}/api/APP/writeComand?comando=${comando}&mac=${mac}`);
   }
 }

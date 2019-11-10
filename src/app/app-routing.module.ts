@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'meus-dados', loadChildren: './meus-dados/meus-dados.module#MeusDadosPageModule' },
   { path: 'primeiro-acesso', loadChildren: './primeiro-acesso/primeiro-acesso.module#PrimeiroAcessoPageModule' },
   { path: 'qtd-moradores', loadChildren: './help/qtd-moradores/qtd-moradores.module#QtdMoradoresPageModule' },
+  { path: 'consumo', loadChildren: './consumo/consumo.module#ConsumoPageModule' },
 ];
 @NgModule({
   imports: [

@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
       Eventos
     </ion-title>
@@ -10,9 +10,35 @@
 </ion-header>
 
 <ion-content>
-  
   <div *ngIf="data" class="fadeIn">
-    <ion-card>
+    <ion-card *ngFor="let evento of eventos">
+      <ion-card-header class="card-info">
+        <ion-card-title>
+          <ion-icon name="alert"></ion-icon> Informativo
+        </ion-card-title>
+        <p><b>
+            <ion-icon name="list-box"></ion-icon> Nível:
+          </b> <span [class]="'text-nivel'+evento.currentLevel">{{ evento.currentLevel | tratarNivel }}</span></p>
+        <p><b>
+            <ion-icon name="speedometer"></ion-icon>
+            Bomba:
+          </b>
+          <span
+            [ngClass]="evento.bombaOnOff==1 ?'text-success':'text-danger'">{{ evento.bombaOnOff==1? 'Ligada' : 'Desligada' }}</span>
+        </p>
+        <p><b>
+            <ion-icon name="water"></ion-icon> Contra-Seco:
+          </b> <span
+            [ngClass]="evento.contraSecoOnOff==1 ?'text-success':'text-danger'">{{ evento.contraSecoOnOff==1? 'Tem água' : 'Não tem água' }}</span>
+        </p>
+        <ion-card-subtitle end>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ evento.dateHourLevelCurrent | dateAgo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+
+    <!-- <ion-card>
       <ion-card-header class="card-success">
         <ion-card-title>
           <ion-icon name="checkmark-circle"></ion-icon> Success
@@ -54,7 +80,7 @@
           <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ '2019-10-24 18:28:33' | dateAgo }}
         </ion-card-subtitle>
       </ion-card-header>
-    </ion-card>
+    </ion-card> -->
   </div>
 
   <!-- Data to display after skeleton screen -->
