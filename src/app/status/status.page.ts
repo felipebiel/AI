@@ -14,8 +14,8 @@ import { AlertController } from '@ionic/angular';
 export class StatusPage {
 
   public progresso: boolean = true;
-  private device: DeviceInterface;
-  private logMomento: LogMomentoInterface;
+  public device: DeviceInterface;
+  public logMomento: LogMomentoInterface;
   public litrosPorNivel: number;
   public litrosReservatorio: number;
   public porcentagemReservatorio: number;
@@ -64,10 +64,13 @@ export class StatusPage {
   }
 
   ionViewDidEnter() {
-    this.getStatus();
-    setInterval(() => {
+    setTimeout(() => {
       this.getStatus();
-    }, 10000);
+      setInterval(() => {
+        this.getStatus();
+      }, 10000);
+    }, 1000);
+
   }
 
   getStatus() {
@@ -105,11 +108,11 @@ export class StatusPage {
 
   desligarBomba() {
     this.deviceService.commandDevice(this.device.id, "B0").subscribe(
-      data =>{
+      data => {
         this.presentAlert("O comando foi enviado para o dispositivo, assim que ele receber o comando o status será mudado, em caso de interferência na rede, o mesmo será descartado")
         this.getStatus();
       },
-      error =>{
+      error => {
 
       }
     );

@@ -51,4 +51,9 @@ export class DeviceService {
     ///api/APP/writeComand?comando=B0&mac=de%3A4f%3A22%3A36%3A99%3A18"
     return this.http.get(`${this.url_base}/api/APP/writeComand?comando=${comando}&mac=${mac}`);
   }
+
+  getConsumo30Dias(mac){
+    ///api/APP/getStatisticLast30Days?mac=
+    return this.http.get(`${this.url_base}/api/APP/getStatisticLast30Days?mac=${mac}`);
+  }
 }

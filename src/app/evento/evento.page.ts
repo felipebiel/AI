@@ -19,8 +19,8 @@ export class EventoPage {
 
   data: boolean = false;
   page_inicio: number = 1;
-  private eventos: Array<EventoInterface>;
-  private device: DeviceInterface;
+  public eventos: Array<EventoInterface>;
+  public device: DeviceInterface;
 
   constructor(
     private storage: NativeStorage,
@@ -30,20 +30,20 @@ export class EventoPage {
   }
 
   ionViewDidEnter(){
-    //pega o id do user persistido e coloca na requisição
-    this.deviceService.getDevice().subscribe(
-      data => {
-        
-        this.device = (data as DeviceInterface);
-        //alert(this.device.id);
-        this.getEventos();
-
-      },
-      error => {
-
-      }
-    );
-    this.data = true;
+    setTimeout(() => {
+      //pega o id do user persistido e coloca na requisição
+      this.deviceService.getDevice().subscribe(
+        data => {
+          this.device = (data as DeviceInterface);
+          //alert(this.device.id);
+          this.getEventos();
+        },
+        error => {
+        }
+      );
+      this.data = true;
+    }, 1000);
+    
   }
 
   getEventos() {

@@ -42,9 +42,6 @@ export class PrimeiroAcessoPage {
       'password_confirm': [null, Validators.compose([
         Validators.required,
       ])],
-      'qtd_moradores': [null, Validators.compose([
-        Validators.required,
-      ])]
     });
   }
 
@@ -73,11 +70,9 @@ export class PrimeiroAcessoPage {
 
         this.clienteService.updateUser(this.fGroup.value).subscribe(
           data => {
-            console.log(data);
             this.progresso = !this.progresso;
             this.menuCtrl.enable(true);
             //antes de redirecionar faz o login novamente para pegar o novo token com a senha mudada
-            //this.navController.navigateRoot('/tabs');
             this.navController.navigateRoot('/tabs');
           },
           error => {
@@ -114,13 +109,6 @@ export class PrimeiroAcessoPage {
       if (this.fGroup.controls.password_confirm.errors.required) {
         this.password_confirm_request = true;
         this.password_confirm_message = "As senhas não conferem";
-      }
-    }
-    //se tiver erro de senha
-    if (this.fGroup.controls.qtd_moradores.errors) {
-      if (this.fGroup.controls.qtd_moradores.errors.required) {
-        this.qtd_moradores_request = true;
-        this.qtd_moradores_message = "Campo é obrigatório";
       }
     }
 

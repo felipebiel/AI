@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { ClienteService } from '../services/cliente/cliente.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -29,7 +29,8 @@ export class MeusDadosPage {
     private clienteService: ClienteService,
     private fBuilder: FormBuilder,
     private storage: NativeStorage,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public alertController: AlertController
   ) {
 
     this.storage.getItem('user').then(
@@ -55,6 +56,52 @@ export class MeusDadosPage {
         Validators.required,
       ])]
     });
+  }
+
+  async presentAlertConfirm(msg) {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: msg,
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.redefinirSenha();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  redefinirSenha(){
+    this.clienteService.updateUser({firstAccess: 1}).subscribe(
+      data => {
+        this.logout();
+      },
+      error => {
+       console.error(error);
+      }
+    );
+  }
+
+  confirmRedefinirSenha(){
+    this.presentAlertConfirm('Para redefinir a senha é necessário saber a senha atual. Tem certeza que deseja fazer essa ação?');
+  }
+
+  logout(){
+    //console.log("SAINDO");
+    this.storage.remove("token");
+    this.storage.remove("user");
+    this.navController.navigateRoot('/login');
   }
 
   ionViewDidEnter() {

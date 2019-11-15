@@ -59,7 +59,12 @@ export class MenuPage implements OnInit {
 
   redirectToEventos(){
     this.menu.toggle();
-    this.navController.navigateForward('/tabs')
+    this.navController.navigateForward('/tabs/evento')
+  }
+
+  redirectToConsumo(){
+    this.menu.toggle();
+    this.navController.navigateForward('/tabs/consumo')
   }
 
   redirectToStatus(){

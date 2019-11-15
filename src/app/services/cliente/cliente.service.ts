@@ -50,7 +50,7 @@ export class ClienteService {
       lastname: form.lastname != undefined ? form.lastname : this.user.lastname,
       email: this.user.email,
       amountOfPeopleInTheResidence: parseInt(form.qtd_moradores),
-      firstAccess: 0,
+      firstAccess: form.firstAccess != undefined ? form.firstAccess : 0,
       enabled: true,
     }
 

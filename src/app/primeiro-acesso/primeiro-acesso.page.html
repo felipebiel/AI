@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Primeiro Acesso</ion-title>
+    <ion-title>Redefinir senha</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="fadeIn">
   <form [formGroup]="fGroup">
   <div class="ion-text-center">
-    <h1>Bem-vindo!</h1>
-    <p>Para seu primeiro acesso, por favor redefina sua senha</p>
+    <h1>Por favor</h1>
+    <p>Redefina sua senha</p>
   </div>
 
   
@@ -28,17 +28,6 @@
     <ion-text color="danger" *ngIf="password_confirm_request" >
       <p text-center class="ion-no-margin">{{ password_confirm_message }}</p>
     </ion-text>
-
-    <ion-item>
-      <ion-icon name="contacts" class="icone-absoluto"></ion-icon>
-      <ion-input placeholder="Quantidade de moradores" text-center type="number" formControlName="qtd_moradores"></ion-input>
-      <ion-icon name="help" class="icone-absoluto-right" (click)="helpMoradores()"></ion-icon>
-    </ion-item>
-
-    <ion-text color="danger" *ngIf="qtd_moradores_request" >
-      <p text-center class="ion-no-margin">{{ qtd_moradores_message }}</p>
-    </ion-text>
-
 
     <ion-list>
       <ion-button margin-top expand="block" (click)="prosseguir()">Prosseguir</ion-button>

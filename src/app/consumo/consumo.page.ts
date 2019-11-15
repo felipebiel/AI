@@ -1,22 +1,67 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { DeviceService } from '../services/device/device.service';
+import { DeviceInterface } from '../interfaces/DeviceInterface';
 
 @Component({
   selector: 'app-consumo',
   templateUrl: './consumo.page.html',
   styleUrls: ['./consumo.page.scss'],
+  providers: [DeviceService]
 })
 export class ConsumoPage {
   @ViewChild('barChart', { static: false }) barChart;
 
   bars: any;
   colorArray: any;
-  dias = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
-  listrosDia = [900, 850, 500, 30, 720, 350, 2000, 1000, 250, 850, 900, 1100, 1350, 959, 450, 3000, 1000, 600, 700, 230, 5690, 364, 874, 989, 987, 987, 1000, 1230, 351, 2200];
-  constructor() { }
+  dias:any = [];
+  litrosDias:any = [];
+  qtdDias = "...";
+
+  private device: DeviceInterface;
+
+  constructor(
+    private deviceService: DeviceService,
+    ) { }
 
   ionViewDidEnter() {
-    this.createBarChart();
+    
+    setTimeout(() => {
+      this.getConsumo();
+     
+    }, 1000);
+
+    
+  }
+
+  getConsumo(){
+    this.deviceService.getDevice().subscribe(
+      data => {
+        //alert(this.user.id);
+        this.device = (data as DeviceInterface);
+        //alert(this.device.id);
+        //pega o ultimo log com o id do device
+        this.deviceService.getConsumo30Dias(this.device.id).subscribe(
+          data2 =>{
+            //alert(data2);
+            const diasTemp = [];
+            const litrosTemp = []
+              Object.keys(data2).forEach(function(key,index) {
+                const dia = new Date(key);                
+                diasTemp.push(dia.getDate().toString());
+                litrosTemp.push(parseFloat(data2[key].replace(",", ".")));
+              });
+              this.dias = diasTemp;
+              this.litrosDias = litrosTemp;
+              this.createBarChart();
+          },
+          error2 =>{
+          }
+        )
+      },
+      error => {
+      }
+    );
   }
 
   createBarChart() {
@@ -34,8 +79,8 @@ export class ConsumoPage {
         datasets: [{
           label: 'Litros por dia',
           //AQUI SERIA OS LITROS
-          data: this.listrosDia,
-          backgroundColor: 'rgba(0,0,0,0)', 
+          data: this.litrosDias,
+          backgroundColor: 'rgba(23, 69, 128, 0.6)', 
           borderColor: 'rgb(23, 69, 128)',
           borderWidth: 1
         }]

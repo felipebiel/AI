@@ -40,10 +40,7 @@ export class LoginPage implements OnInit {
       ])]
     });
 
-    this.storage.getItem('user').then(
-      data => {
-        this.user = (data as UserInterface);
-      });
+    
   }
 
   ngOnInit() {
@@ -52,16 +49,21 @@ export class LoginPage implements OnInit {
 
   //É acionado ao entrar em uma página antes de se tornar a ativa
   ionViewDidEnter() {
-    //desabilita o side menu no login
-    this.menuCtrl.enable(false);
 
-    let token = this.user.token;
-    //console.log(token);
-    if (token != null) {
-      //habilita o menu novamente ao redirecionar
-      this.menuCtrl.enable(true);
-      this.navController.navigateRoot('/tabs');
-    }
+    this.storage.getItem('user').then(
+      data => {
+        this.user = (data as UserInterface);
+        let token = this.user.token;
+        //console.log(token);
+        if (token != null) {
+          //habilita o menu novamente ao redirecionar
+          this.menuCtrl.enable(true);
+          this.navController.navigateRoot('/tabs');
+        }
+    });
+    //alert();
+    //desabilita o side menu no login
+    this.menuCtrl.enable(false);   
 
   }
 
