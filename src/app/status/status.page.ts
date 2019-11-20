@@ -15,7 +15,9 @@ export class StatusPage {
 
   public progresso: boolean = true;
   public device: DeviceInterface;
-  public logMomento: LogMomentoInterface;
+  public bombaNoMomento: number;
+  public nivelNoMomento: number;
+  public contraSecoNoMomento: number;
   public litrosPorNivel: number;
   public litrosReservatorio: number;
   public porcentagemReservatorio: number;
@@ -64,11 +66,13 @@ export class StatusPage {
   }
 
   ionViewDidEnter() {
+  
     setTimeout(() => {
       this.getStatus();
       setInterval(() => {
         this.getStatus();
-      }, 10000);
+        //alert('BUSCANDO...')
+      }, 3000);
     }, 1000);
 
   }
@@ -77,25 +81,52 @@ export class StatusPage {
     //pega o id do user persistido e coloca na requisição
     this.deviceService.getDevice().subscribe(
       data => {
-        //alert(this.user.id);
+        
         this.device = (data as DeviceInterface);
         //alert(this.device.id);
-        //pega o ultimo log com o id do device
-        this.logService.getAlarmMomento(this.device.id).subscribe(
-          data2 => {
-            this.logMomento = (data2 as LogMomentoInterface);
+        //pega o status da bomba no momento
+        this.deviceService.getPumpAtMoment(this.device.id).subscribe(
+          dataPump => {
 
-            //calculando nivel
-            this.litrosPorNivel = this.device.reservoirCapacity / 4;
-            this.litrosReservatorio = (this.logMomento.levelAtMoment + 1) * this.litrosPorNivel;
-            this.porcentagemReservatorio = 100 * this.litrosReservatorio / this.device.reservoirCapacity;
+            const responsePump = (dataPump as any);
+            this.bombaNoMomento = responsePump.onOff;
+            //alert(this.bombaNoMomento);
+            //pega o status do nivel no momento
+            this.deviceService.getLevelAtMoment(this.device.id).subscribe(
+              dataLevel => {
+                const responseLevel = (dataLevel as any);
 
-            this.progresso = false;
+                this.nivelNoMomento = responseLevel.currentLevel;
+                //alert(responseLevel.currentLevel);
+                //calculando nivel
+                this.litrosPorNivel = this.device.reservoirCapacity / 4;
+                this.litrosReservatorio = (this.nivelNoMomento + 1) * this.litrosPorNivel;
+                this.porcentagemReservatorio = 100 * this.litrosReservatorio / this.device.reservoirCapacity;
+                
+                //pega o status do contra seco
+                this.deviceService.getContraSecoAtMoment(this.device.id).subscribe(
+                  dataContraSeco =>{
+                    const responseContraSeco = (dataContraSeco as any);
+                    this.contraSecoNoMomento = responseContraSeco.onOff;
+                    //alert(this.contraSecoNoMomento);
+
+                    this.progresso = false;
+                  },
+                  errorContraSeco =>{
+
+                  }
+                )
+                //
+              },
+              errorLevel => {
+
+              }
+            )
           },
-          error2 => {
+          errorPump => {
 
           }
-        )
+        );
       },
       error => {
       }

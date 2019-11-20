@@ -37,6 +37,9 @@ export class EventoPage {
           this.device = (data as DeviceInterface);
           //alert(this.device.id);
           this.getEventos();
+          setInterval(() => {
+            this.getEventos();
+          }, 3000);         
         },
         error => {
         }

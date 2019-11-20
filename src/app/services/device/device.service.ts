@@ -43,6 +43,18 @@ export class DeviceService {
     return this.http.put(`${this.url_base}/api/device/update/${id}`, request);
   }
 
+  getLevelAtMoment(mac){
+    return this.http.get(`${this.url_base}/api/logAPI/levelAtThePresentMoment?mac=${mac}`);
+  }
+
+  getPumpAtMoment(mac){
+    return this.http.get(`${this.url_base}/api/logAPI/pumpAtThePresentMoment?mac=${mac}`);
+  }
+
+  getContraSecoAtMoment(mac){
+    return this.http.get(`${this.url_base}/api/logAPI/contraSecoAtThePresentMoment?mac=${mac}`);
+  }
+
   teste() {
     return true;
   }

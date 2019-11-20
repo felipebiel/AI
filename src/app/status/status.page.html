@@ -14,15 +14,15 @@
   <div class="fadeIn" *ngIf="!progresso">
 
     <div class="ion-text-center">
-      <h3>Status da bomba</h3>
+      <h3>Bomba</h3>
     </div>
 
     <ion-card>
-      <ion-card-header class=""
-        [ngClass]="logMomento.onOff==1 ?'ion-text-center card-success':'ion-text-center card-alert'">
+      <ion-card-header padding class=""
+        [ngClass]="bombaNoMomento==1 ?'ion-text-center card-success':'ion-text-center card-alert'">
         <ion-card-title>
-          <span *ngIf="logMomento.onOff==1"> Ligada</span>
-          <span *ngIf="logMomento.onOff==0"> Desligada</span>
+          <span *ngIf="bombaNoMomento==1"> Ligada</span>
+          <span *ngIf="bombaNoMomento==0"> Desligada</span>
         </ion-card-title>
       </ion-card-header>
     </ion-card>
@@ -30,8 +30,8 @@
     <div class="ion-text-center">
       <h3>Nível</h3>
     </div>
-    <div margin-bottom class="ion-text-center">
-      <img [src]="'assets/images/status/status_' + logMomento.levelAtMoment + '.png'" width="250">
+    <div margin class="ion-text-center">
+      <img [src]="'assets/images/status/status_' + nivelNoMomento + '.png'" width="250">
     </div>
 
     <div class="ion-text-center">
@@ -39,11 +39,25 @@
       <h4>Aproximadamente {{ litrosReservatorio }} Litros</h4>
     </div>
 
+    <div class="ion-text-center">
+      <h3>Contra Seco</h3>
+    </div>
+
+    <ion-card>
+      <ion-card-header padding class=""
+        [ngClass]="contraSecoNoMomento==1 ?'ion-text-center card-success':'ion-text-center card-alert'">
+        <ion-card-title>
+          <span *ngIf="contraSecoNoMomento==1"> Tem água</span>
+          <span *ngIf="contraSecoNoMomento==0"> Sem água</span>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
     <div class="ion-text-center consumo">
       <h3>Controle da bomba d'agua</h3>
     </div>
 
-    <ion-list *ngIf="logMomento.levelAtMoment  == 3">
+    <ion-list *ngIf="nivelNoMomento  == 3">
   
       <ion-card-header
         class="ion-text-center card-alert">
@@ -53,16 +67,16 @@
       </ion-card-header>
     </ion-list>
 
-    <ion-list *ngIf="logMomento.onOff==1">
+    <ion-list *ngIf="bombaNoMomento==1">
       <ion-button color="warning" margin-top expand="block" (click)="confirmarDesligarBomba()">Desligar</ion-button>
     </ion-list>
 
-    <ion-list *ngIf="logMomento.onOff==0 && logMomento.levelAtMoment < 3">
+    <ion-list *ngIf="bombaNoMomento==0 && nivelNoMomento < 3">
       <ion-button color="warning" margin-top expand="block" (click)="confirmarDesligarBomba()">ligar</ion-button>
     </ion-list>
   </div>
 
-  <div margin-top class="fadeIn">
+  <div padding class="fadeIn">
     <div text-center margin class="white" *ngIf="progresso">Carregando</div>
     <ion-progress-bar *ngIf="progresso" type="indeterminate"></ion-progress-bar>
   </div>
