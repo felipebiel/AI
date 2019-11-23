@@ -137,6 +137,23 @@ export class StatusPage {
     this.presentAlertConfirm('Tem certeza que deseja fazer essa ação?');
   }
 
+  confirmarLigarBomba(){
+    this.presentAlertConfirmLigar("Tem certeza que deseha fazer essa ação?");
+  }
+
+  ligarBomba(){
+    this.deviceService.commandDevice(this.device.id, "B1").subscribe(
+      data => {
+        this.presentAlert("O comando foi enviado para o dispositivo, assim que ele receber o comando o status será mudado, em caso de interferência na rede, o mesmo será descartado")
+        this.getStatus();
+      },
+      error => {
+
+      }
+    );
+  }
+
+
   desligarBomba() {
     this.deviceService.commandDevice(this.device.id, "B0").subscribe(
       data => {
@@ -147,6 +164,30 @@ export class StatusPage {
 
       }
     );
+  }
+
+  async presentAlertConfirmLigar(msg) {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: msg,
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.ligarBomba();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
