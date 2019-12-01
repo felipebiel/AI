@@ -67,11 +67,21 @@
       </ion-card-header>
     </ion-list>
 
-    <ion-list *ngIf="bombaNoMomento==1">
+    <ion-list *ngIf="contraSecoNoMomento  == 0">
+  
+      <ion-card-header
+        class="ion-text-center card-alert">
+        <ion-card-title>
+          <p>Não tem água, nenhuma ação é permitida</p>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-list>
+
+    <ion-list *ngIf="bombaNoMomento==1 && contraSecoNoMomento ==1">
       <ion-button color="warning" margin-top expand="block" (click)="confirmarDesligarBomba()">Desligar</ion-button>
     </ion-list>
 
-    <ion-list *ngIf="bombaNoMomento==0 && nivelNoMomento < 3">
+    <ion-list *ngIf="bombaNoMomento==0 && nivelNoMomento < 3 && contraSecoNoMomento ==1">
       <ion-button color="warning" margin-top expand="block" (click)="confirmarLigarBomba()">Ligar</ion-button>
     </ion-list>
   </div>

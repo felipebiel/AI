@@ -60,6 +60,7 @@ export class DeviceService {
   }
 
   commandDevice(mac, comando) {
+    //alert(`${this.url_base}/api/APP/writeComand?comando=${comando}&mac=${mac}`);
     ///api/APP/writeComand?comando=B0&mac=de%3A4f%3A22%3A36%3A99%3A18"
     return this.http.get(`${this.url_base}/api/APP/writeComand?comando=${comando}&mac=${mac}`);
   }

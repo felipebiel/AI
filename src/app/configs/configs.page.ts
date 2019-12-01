@@ -79,10 +79,13 @@ export class ConfigsPage {
     }
 
     this.deviceService.updateDevice(this.id, form).subscribe(
-      data => {
-        this.presentToast();
-        //alert(this.id);
-        this.deviceService.commandDevice(this.id, 'N'+this.nivel).subscribe()
+      data => {       
+        this.deviceService.commandDevice(this.id, 'N'+this.nivel).subscribe(
+          dataComando =>{
+            //alert(this.id);
+            this.presentToast();
+          }
+        )
       },
       error => {            
       }
