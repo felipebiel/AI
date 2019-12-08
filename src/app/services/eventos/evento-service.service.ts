@@ -6,7 +6,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   providedIn: 'root'
 })
 export class EventoServiceService {
-  private url_base = "http://172.132.0.104:8090";
+  private url_base = "http://192.168.0.8:8090";
 
   constructor(
     private http: HttpClient,

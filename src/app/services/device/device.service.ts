@@ -8,7 +8,7 @@ import { UserInterface } from 'src/app/interfaces/UserInterface';
 })
 export class DeviceService {
 
-  private url_base = "http://172.132.0.104:8090";
+  private url_base = "http://192.168.0.8:8090";
   private user: UserInterface;
 
   constructor(

@@ -10,7 +10,7 @@ export class ClienteService {
 
   //private url_base = "http://172.132.0.104:8090";
   //ANDERSON
-  private url_base = "http://172.132.0.104:8090";
+  private url_base = "http://192.168.0.8:8090";
 
   public logado:boolean = false;
   private user:UserInterface;
